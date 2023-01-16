@@ -3,8 +3,11 @@ const puppeteer = require('puppeteer')
 async function getMonthlyListeners(UUID) {
 	try {
 		const URL = 'https://open.spotify.com/artist/'+UUID
-		const browser = await puppeteer.launch()
-
+		const browser = await puppeteer.launch({
+		   headless: true,
+   		   args: ['--no-sandbox']
+		});
+		
 		const page = await browser.newPage()
 		await page.goto(URL, {
             waitUntil: "networkidle0",
